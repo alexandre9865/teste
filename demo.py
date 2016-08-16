@@ -22,13 +22,13 @@ class LayoutExample(QWidget):
 		self.form_layout = QFormLayout()
  
 		# The salutations that we want to make available
-		self.salutations = ['building.jpg',
+		self.options = ['building.jpg',
 							'cat.png',
 							'planet.jpg']
  
 		# Create and fill the combo box to choose the salutation
-		self.salutation = QComboBox(self)
-		self.salutation.addItems(self.salutations)
+		self.option = QComboBox(self)
+		self.option.addItems(self.options)
  
 		# Add it to the form layout with a label
 		self.label = QLabel() 
@@ -37,7 +37,7 @@ class LayoutExample(QWidget):
 		 
 		# Add it to the form layout with a label
 		self.form_layout.addRow(self.label)
-		self.form_layout.addRow(self.salutation)
+		self.form_layout.addRow(self.option)
   
 		# Add the form layout to the main VBox layout
 		self.layout.addLayout(self.form_layout)
