@@ -31,23 +31,14 @@ class LayoutExample(QWidget):
 		self.salutation.addItems(self.salutations)
  
 		# Add it to the form layout with a label
-		 
 		self.label = QLabel() 
 		self.pixmap = QPixmap('C:/Users/Alexandre/Documents/GitHub/teste/building.jpg')
 		self.label.setPixmap(self.pixmap)
-
-		# Create the entry control to specify a recipient
-		# and set its placeholder text
-		self.recipient = QLineEdit(self)
-		self.recipient.setPlaceholderText('world')
- 
+		 
 		# Add it to the form layout with a label
 		self.form_layout.addRow(self.label)
- 
-		# Create and add the label to show the greeting text
-		self.greeting = QLabel('', self)
-		self.form_layout.addRow('Greeting:', self.greeting)
- 
+		self.form_layout.addRow(self.salutation)
+  
 		# Add the form layout to the main VBox layout
 		self.layout.addLayout(self.form_layout)
  
@@ -59,12 +50,6 @@ class LayoutExample(QWidget):
  
 		# Add stretch to push the button to the far right
 		self.button_box.addStretch(1)
- 
-		# Create the build button with its caption
-		self.build_button = QPushButton('Build Greeting', self)
- 
-		# Add it to the button box
-		self.button_box.addWidget(self.build_button)
  
 		# Add the button box to the bottom of the main VBox layout
 		self.layout.addLayout(self.button_box)
