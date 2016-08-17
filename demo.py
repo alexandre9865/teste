@@ -56,6 +56,7 @@ class LayoutExample(QWidget):
 		self.buttonSave = QPushButton('Save', self)
 		self.buttonSave.clicked.connect(lambda: self.save())
 
+		self.config_layout.addStretch(1)
 		self.config_layout.addWidget(self.option)
 		self.config_layout.addStretch(1)
 		self.config_layout.addWidget(self.buttonSave)
@@ -70,6 +71,10 @@ class LayoutExample(QWidget):
 		self.widget1.setVisible(status)
 		self.widget2.setVisible(not status)
 
+	def save(self):
+		self.text = str(self.option.currentText())
+		self.alternate(1==1)
+		return self.text
 
 	def run(self):
 		# Show the form
