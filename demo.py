@@ -62,7 +62,8 @@ class LayoutExample(QWidget):
   
 		# Add the form layout to the main VBox layout
 		self.layout.addLayout(self.config_layout)
- 
+		self.widget1.setVisible(1==1)
+		self.widget2.setVisible(1==0)
 		# Add stretch to separate the form layout from the button
 		self.layout.addStretch(1)
 	
