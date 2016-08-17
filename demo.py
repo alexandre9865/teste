@@ -28,9 +28,9 @@ class LayoutExample(QWidget):
 		self.widget1.setLayout(self.image_layout)
 
 		# The salutations that we want to make available
-		self.options = ['building.jpg',
+		self.options = ['planet.jpg',
 						'cat.png',
-						'planet.jpg']
+						'building.jpg']
  
 		# Create and fill the combo box to choose the salutation
 		self.option = QComboBox(self)
@@ -38,7 +38,7 @@ class LayoutExample(QWidget):
  
 		# Add it to the form layout with a label
 		self.label = QLabel() 
-		self.pixmap = QPixmap('C:/Users/Alexandre/Documents/GitHub/teste/cat.png')
+		self.pixmap = QPixmap(''+self.save())
 		self.label.setPixmap(self.pixmap)
 
 		self.button = QPushButton('Configurations', self)
@@ -55,10 +55,9 @@ class LayoutExample(QWidget):
 
 		self.buttonSave = QPushButton('Save', self)
 		self.buttonSave.clicked.connect(lambda: self.save())
+		self.buttonSave.clicked.connect(lambda: self.alternate(1==1))
 
-		self.config_layout.addStretch(1)
 		self.config_layout.addWidget(self.option)
-		self.config_layout.addStretch(1)
 		self.config_layout.addWidget(self.buttonSave)
   
 		# Add the form layout to the main VBox layout
@@ -73,7 +72,9 @@ class LayoutExample(QWidget):
 
 	def save(self):
 		self.text = str(self.option.currentText())
-		self.alternate(1==1)
+		self.px = QPixmap()
+		self.px.load(''+self.text);
+		self.label.setPixmap(self.px);
 		return self.text
 
 	def run(self):
