@@ -1,4 +1,4 @@
-import sys, os
+import sys, sqlite3
 from PySide.QtGui import *
 from PySide.QtCore import *
 
@@ -27,22 +27,21 @@ class LayoutExample(QWidget):
 		self.image_layout = QFormLayout()
 		self.widget1.setLayout(self.image_layout)
 
-		# The salutations that we want to make available
-		self.options = ['planet.jpg',
-						'cat.png',
-						'building.jpg']
- 
-		# Create and fill the combo box to choose the salutation
+		self.connection = sqlite3.connect('teste.db')
+		self.c = self.connection.cursor()
+		self.c.execute('SELECT image FROM dados')
+		
 		self.option = QComboBox(self)
-		self.option.addItems(self.options)
+		for row in self.c.fetchall():
+			self.option.addItems(row)
  
 		# Add it to the form layout with a label
 		self.label = QLabel() 
-		self.pixmap = QPixmap(''+self.save())
+		self.pixmap = QPixmap(self.save())
 		self.label.setPixmap(self.pixmap)
 
 		self.button = QPushButton('Configurations', self)
-		self.button.clicked.connect(lambda: self.alternate(1==0))
+		self.button.clicked.connect(lambda: self.alternate(False))
 		# Add it to the form layout with a label
 		self.image_layout.addRow(self.label)
 		self.image_layout.addRow(self.button)
@@ -55,15 +54,15 @@ class LayoutExample(QWidget):
 
 		self.buttonSave = QPushButton('Save', self)
 		self.buttonSave.clicked.connect(lambda: self.save())
-		self.buttonSave.clicked.connect(lambda: self.alternate(1==1))
+		self.buttonSave.clicked.connect(lambda: self.alternate(True))
 
 		self.config_layout.addWidget(self.option)
 		self.config_layout.addWidget(self.buttonSave)
   
 		# Add the form layout to the main VBox layout
 		self.layout.addLayout(self.config_layout)
-		self.widget1.setVisible(1==1)
-		self.widget2.setVisible(1==0)
+		self.widget1.setVisible(True)
+		self.widget2.setVisible(False)
 		# Add stretch to separate the form layout from the button
 		self.layout.addStretch(1)
 	
@@ -74,7 +73,7 @@ class LayoutExample(QWidget):
 	def save(self):
 		self.text = str(self.option.currentText())
 		self.px = QPixmap()
-		self.px.load(''+self.text);
+		self.px.load(self.text);
 		self.label.setPixmap(self.px);
 		return self.text
 
