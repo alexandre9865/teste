@@ -1,4 +1,4 @@
-import sys, sqlite3
+import sys, json
 from PySide.QtGui import *
 from PySide.QtCore import *
 
@@ -27,13 +27,21 @@ class LayoutExample(QWidget):
 		self.image_layout = QFormLayout()
 		self.widget1.setLayout(self.image_layout)
 
-		self.connection = sqlite3.connect('teste.db')
-		self.c = self.connection.cursor()
-		self.c.execute('SELECT image FROM dados')
+		#SQL
+		#self.connection = sqlite3.connect('teste.db')
+		#self.c = self.connection.cursor()
+		#self.c.execute('SELECT image FROM dados')
 		
+		data = {
+		   'image' : ['planet.jpg', 'cat.png', 'building.jpg']
+		}
+
+
+
 		self.option = QComboBox(self)
-		for row in self.c.fetchall():
-			self.option.addItems(row)
+		#for row in self.c.fetchall():
+		#	self.option.addItems(row)
+		self.option.addItems(data['image'])
  
 		# Add it to the form layout with a label
 		self.label = QLabel() 
